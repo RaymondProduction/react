@@ -14,7 +14,10 @@
    <script type="text/babel">
    // rendering element
     ReactDOM.render(
-        <h1>I am using react</h1>,  // element, which we want to create
+        <div>
+          <h1>I am using react </h1>
+          <p>Time: {new Date().getHours()} : {new Date().getMinutes()}</p>
+        </div>,  // element, which we want to create
         document.getElementById("app")    // where we create this element
     )
    </script>
