@@ -3,6 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <title>Hello React</title>
+    <style>
+      .message{
+          padding: 8px;
+          border: 1px #ccc solid;
+      }
+    </style>
 </head>
 <body>
     <div id="app"> </div>
@@ -12,15 +18,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
 
    <script type="text/babel">
+   const classH = "message";
    const time = {
       hours: new Date().getHours(),
-      minutes: new Date().getMinutes()
+      minutes: new Date().getMinutes(),
+      style: {
+        color:'green',
+        fontFamily:'Verdana'
+      }
    }
    // rendering element
     ReactDOM.render(
         <div>
-          <h1>I am using react </h1>
-          <p>Time: {time.hours} : {time.minutes}</p>
+          <h1 className={classH}>I am using react </h1>
+          <p style={time.style}>Time: {time.hours} : {time.minutes}</p>
         </div>,  // element, which we want to create
         document.getElementById("app")    // where we create this element
     )
