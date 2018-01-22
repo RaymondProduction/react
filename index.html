@@ -7,11 +7,26 @@
       .message{
           padding: 8px;
       }
+      button{
+          width: 100px;
+          height:30px;
+          border-radius: 4px;
+          margin:50px;
+      }
+      .on{
+          color:#666;
+          background-color: #ccc;
+      }
+      .off{
+          color:#888;
+          background-color: white;
+      }
     </style>
 </head>
 <body>
     <div id="message"> </div>
     <div id="time"></div>
+    <div id='button'></div>
 
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
@@ -52,6 +67,29 @@
           )
       }
       setInterval(tick, 1000);
+
+      // Use 'state'
+      class ClickButton extends React.Component {
+
+         constructor(props) {
+             super(props);
+             this.state = {class: "off", label: "Add message"};
+
+             this.press = this.press.bind(this);
+         }
+         press(){
+             let className = (this.state.class==="off")?"on":"off";
+             this.setState({class: className});
+         }
+         render() {
+             return <button onClick={this.press} className={this.state.class}>{this.state.label}</button>;
+         }
+     }
+
+     ReactDOM.render(
+         <ClickButton />,
+         document.getElementById("button")
+     )
     </script>
 </body>
 </html>
