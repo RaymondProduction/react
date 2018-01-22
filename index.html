@@ -24,6 +24,10 @@
           fontFamily:'Verdana'
       }
       const date = new Date();
+      // create component for time
+      var Time = () => {
+       return (<p style={style}>Time: {new Date().toLocaleTimeString()}</p>)
+      };
       // rendering elements
       ReactDOM.render(
           <div>
@@ -34,9 +38,7 @@
       )
       function tick() {
           ReactDOM.render(
-              <div>
-               <p style={style}>Time: {new Date().toLocaleTimeString()}</p>
-              </div>,  // element, which we want to create
+              <Time/>,  // element, which we want to create
               document.getElementById("time"),    // where we create this element
               function(){ console.log('Rendring time');}
           )
