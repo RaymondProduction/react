@@ -6,7 +6,6 @@
     <style>
       .message{
           padding: 8px;
-          border: 1px #ccc solid;
       }
     </style>
 </head>
@@ -24,22 +23,31 @@
           fontFamily:'Verdana'
       }
       const date = new Date();
-      // create component for time
+      // create component for time with use Arrow functions
       var Time = () => {
        return (<p style={style}>Time: {new Date().toLocaleTimeString()}</p>)
       };
+      // create component for message with use class ES6
+      class Message extends React.Component {
+        render(){
+          return <div style={{  border: '1px solid #ddd' , borderRadius: '4px', padding: '4px'}}>
+                  <h1 className={classH}>{this.props.title}</h1>
+                  <p style={{color: 'grey', fontFamaly: 'Verdana'}}>{this.props.text}</p>
+                </div>
+        }
+      }
+      // Default props
+      Message.defaultProps = {title: "News"};
       // rendering elements
       ReactDOM.render(
-          <div>
-            <h1 className={classH}>I am using react </h1>
-          </div>,  // element, which we want to create
-          document.getElementById("message"),    // where we create this element
+          <Message text="I am using react"/>,
+          document.getElementById("message"),
           function(){ console.log('Rendring message');}
       )
       function tick() {
           ReactDOM.render(
-              <Time/>,  // element, which we want to create
-              document.getElementById("time"),    // where we create this element
+              <Time/>,
+              document.getElementById("time"),
               function(){ console.log('Rendring time');}
           )
       }
