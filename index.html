@@ -38,10 +38,33 @@
           fontFamily:'Verdana'
       }
       const date = new Date();
-      // create component for time with use Arrow functions
-      var Time = () => {
-       return (<p style={style}>Time: {new Date().toLocaleTimeString()}</p>)
+
+      class Time extends React.Component {
+         constructor(props) {
+                super(props);
+                this.state = {date: new Date()};
+        }
+        // Run after rendering
+        componentDidMount() {
+                this.timerId = setInterval(
+                  ()=> this.tick(),
+                  1000
+                );
+        }
+        // Run after delete DOM element
+        componentWillUnmount() {
+                clearInterval(this.timerId);
+        }
+        tick() {
+                this.setState({
+                  date: new Date()
+                });
+        }
+        render() {
+          return (<p style={style}>Time: {this.state.date.toLocaleTimeString()}</p>);
+        }
       };
+
       // create component for message with use class ES6
       class Message extends React.Component {
         render(){
