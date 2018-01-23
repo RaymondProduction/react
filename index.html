@@ -38,6 +38,13 @@
           fontFamily:'Verdana'
       }
       const date = new Date();
+      const messageList = {
+        title: 'Main theme',
+        messages: [
+          {title: 'First news', text: 'Hi, It is test'},
+          {title: 'Second news', text: 'Ok, How do you do?'}
+        ]
+      }
 
       class Time extends React.Component {
          constructor(props) {
@@ -76,9 +83,25 @@
       }
       // Default props
       Message.defaultProps = {title: "News"};
+      class MessageList extends React.Component {
+        render(){
+          return(
+            <div>
+                <h2>{this.props.data.title}</h2>
+                <ul>
+                {
+                    this.props.data.messages.map(function(item){
+                        return <Message text={item.text} title={item.title} />
+                    })
+                }
+                </ul>
+            </div>);
+           }
+
+      }
       // rendering elements
       ReactDOM.render(
-          <Message text="I am using react"/>,
+          <MessageList data={messageList}/>,
           document.getElementById("message"),
           function(){ console.log('Rendring message');}
       )
