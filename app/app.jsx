@@ -1,6 +1,6 @@
 var ReactDOM = require('react-dom');
 var React = require('react');
-var MessageList = require('./components/MessageList.jsx');
+var MessageForm = require('./components/MessageForm.jsx');
 
 const messageList = {
     title: 'Main theme',
@@ -11,6 +11,6 @@ const messageList = {
 }
 
 ReactDOM.render(
-    <MessageList data={messageList} />,
+    <MessageForm data={messageList} />,
     document.getElementById("app")
 )
