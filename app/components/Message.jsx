@@ -9,3 +9,5 @@ class Message extends React.Component {
 }
 // Default props
 Message.defaultProps = {title: "News"};
+
+module.exports = Message;

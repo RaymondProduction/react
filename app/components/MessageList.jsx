@@ -19,18 +19,20 @@ class MessageList extends React.Component {
       this.setState({messages: filteredList});
   }
   render(){
+    var i = 0;
     return(
       <div>
           <h2>{this.props.data.title}</h2>
             <SearchPlugin filter={this.filterList}/>
-          <ul>
           {
               this.state.messages.map(function(item){
-                  return <Message text={item.text} title={item.title} />
+                  return <Message key= {i++} text={item.text} title={item.title} />
               })
           }
-          </ul>
       </div>);
-     }
+    // Each child in an array or iterator should have a unique "key" prop.
+  }
 
 }
+
+module.exports = MessageList;
