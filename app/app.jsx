@@ -27,6 +27,7 @@ ReactDOM.render(
         <Switch>
             <Route exact path="/" component={Main} />
             <Route path="/about" component={About} />
+            <Route path="/contact" children={()=><h2>Contact</h2>} />
             <Route component={NotFound} />
         </Switch>
     </BrowserRouter>,
