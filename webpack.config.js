@@ -19,6 +19,7 @@ module.exports = {
             }
         ]
     },
+  //devtool: 'eval-source-map',
   devServer: {
     historyApiFallback: true, // Without this parameter it will be 'Cannot GET /...'
     /*
