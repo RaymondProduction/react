@@ -1,7 +1,7 @@
-var ReactDOM = require('react-dom');
-var React = require('react');
+import ReactDOM from'react-dom';
+import React from 'react';
 
-var MessageForm = require('./components/MessageForm.jsx');
+import MessageForm from './components/MessageForm.jsx';
 
 // using ES6 modules
 import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom'
@@ -16,7 +16,10 @@ const style = {
 
 class About extends React.Component{
     render(){
-        return <h2>About website</h2>;
+        // get params
+        const id = this.props.match.params.id;
+        const name = this.props.match.params.name;
+        return <h2>id: {id}  Name: {name}</h2>;
     }
 }
 class NotFound extends React.Component{
@@ -42,7 +45,7 @@ class Tablet extends React.Component{
 }
 class Products extends React.Component{
     render(){
-        return <h2>Products</h2>;
+        return <h2>Products id: {this.props.match.params.id}</h2>;
     }
 }
 class Nav extends React.Component{
@@ -54,14 +57,18 @@ class Nav extends React.Component{
               </nav>;
     }
 }
+// ? - optional parameters
+// (\d+) - the regular expression corresponds to one digit or several digits
 ReactDOM.render(
     <BrowserRouter>
         <div>
             <Nav />
             <Switch>
                 <Route exact path="/" component={Main} />
-                <Route path="/about" component={About} />
-                <Route path="/products" component={Products} />
+                <Route path="/about/:id?/:name?" component={About} />
+                <Route path="/products/:id(\d+)" component={Products} />
+                <Route path="/products/phones" component={Phone} />
+                <Route path="/products/tablets" component={Tablet} />
                 <Route path="/contact" children={()=><h2>Contact</h2>} />
                 <Route component={NotFound} />
             </Switch>
