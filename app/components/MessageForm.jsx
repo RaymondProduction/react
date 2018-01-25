@@ -1,56 +1,78 @@
 var React = require('react');
+
+class MessageField extends React.Component {
+  constructor(props) {
+    super(props);
+    var isValid = this.validate(props.value);
+    this.state = {value: props.value, valid : isValid};
+    this.onChange = this.onChange.bind(this);
+  }
+  validate(val){
+    return val.length > 2;
+  }
+  onChange(e) {
+    var val = e.target.value;
+    var isValid = this.validate(val);
+    this.setState({value: val, valid: isValid});
+  }
+  render() {
+    // color border of the field  for input value
+    var color = this.state.valid ? "green" : "red";
+
+    return (
+      <p>
+          <label>Message:</label><br />
+          <input type="text" value={this.state.value} onChange={this.onChange} style ={{borderColor: color}}/>
+      </p>
+    );
+  }
+}
+
+class TitleField extends React.Component {
+  constructor(props) {
+    super(props);
+    var isValid = this.validate(props.value);
+    this.state = {value: props.value, valid : isValid};
+    this.onChange = this.onChange.bind(this);
+  }
+  validate(val){
+    return val.length > 2;
+  }
+  onChange(e) {
+    var val = e.target.value;
+    var isValid = this.validate(val);
+    this.setState({value: val, valid: isValid});
+  }
+  render() {
+    // color border of the field  for input value
+    var color = this.state.valid ? "green" : "red";
+
+    return (
+      <p>
+          <label>Title:</label><br />
+          <input type="text" value={this.state.value} onChange={this.onChange} style ={{borderColor: color}}/>
+      </p>
+    );
+  }
+}
 class MessageForm extends React.Component {
   constructor(props) {
     super(props);
-    var message = props.message;
-    var messageIsValid = this.validateMessage(message);
-    var title = props.title;
-    var titleIsValid = this.validateMessage(title);
-
-    this.state = {message: message, title: title, messageValid: messageIsValid, titleValid : titleIsValid};
-
-    this.onChangeMessage = this.onChangeMessage.bind(this);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  validateMessage(message){
-    return message.length > 2;
-  }
-  validateTitle(title){
-    return title.length > 2;
-  }
-  onChangeMessage(e) {
-    var val = e.target.value;
-    var valid = this.validateMessage(val);
-    this.setState({message: val, messageValid: valid});
-  }
-  onChangeTitle(e) {
-    var val = e.target.value;
-    var valid = this.validateTitle(val);
-    this.setState({title: val, titleValid: valid});
   }
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.title && this.state.message)
-      alert("Title: " + this.state.title+" Message: " + this.state.message);
+    var message = this.refs.messageField.state.value;
+    var title = this.refs.titleField.state.value;
+    if (this.refs.messageField.state.valid && this.refs.titleField.state.valid)
+      alert("Title: " + title+" Message: " + message);
   }
 
   render() {
-    // color border of the field  for input message
-    var messageColor = this.state.messageValid ? "green" : "red";
-    // color border of the field  for input title
-    var titleColor = this.state.titleValid ? "green" : "red";
-
     return (
         <form onSubmit={this.handleSubmit}>
-            <p>
-                <label>Title:</label><br />
-                <input type="text" value={this.state.title} onChange={this.onChangeTitle} style ={{borderColor: titleColor}}/>
-            </p>
-            <p>
-                <label>Message:</label><br />
-                <input type="text" value={this.state.message} onChange={this.onChangeMessage} style ={{borderColor: messageColor}}/>
-            </p>
+            <TitleField value="Title" ref="titleField"/>
+            <MessageField value="Message" ref="messageField"/>
             <input type="submit" value="Send" />
         </form>
     );
