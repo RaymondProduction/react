@@ -13,6 +13,11 @@ const active = {
 const style = {
      margin:'5px'
 };
+const phones =[
+                {id: 1, name: "iPhone 7"},
+                {id: 2, name: "Google Pixel"},
+                {id: 3, name: "HTC U Ultra"}
+            ];
 
 class About extends React.Component{
     render(){
@@ -33,9 +38,20 @@ class Main extends React.Component{
         return <h2>Main</h2>;
     }
 }
-class Phone extends React.Component{
+class PhoneList extends React.Component{
     render(){
-        return <h3>Phones</h3>;
+        return <div>
+                    <h2>Phones</h2>
+                    <ul>
+                    {
+                        phones.map(function(item){
+                            return <li key={item.id}>
+                                     <NavLink to={`/products/${item.id}`}>{item.name}</NavLink>
+                                   </li>
+                        })
+                    }
+                </ul>
+            </div>;
     }
 }
 class Tablet extends React.Component{
@@ -43,9 +59,17 @@ class Tablet extends React.Component{
         return <h3>Tablets</h3>;
     }
 }
-class Products extends React.Component{
+class ProductsId extends React.Component{
     render(){
         return <h2>Products id: {this.props.match.params.id}</h2>;
+    }
+}
+class Products extends React.Component{
+    render(){
+        return <nav>
+                <NavLink exact to="/products/phones" style={style} activeStyle={active}>Phones</NavLink>
+                <NavLink to="/products/tablets" style={style} activeStyle={active}>Tablets</NavLink>
+              </nav>;
     }
 }
 class Nav extends React.Component{
@@ -66,8 +90,9 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component={Main} />
                 <Route path="/about/:id?/:name?" component={About} />
-                <Route path="/products/:id(\d+)" component={Products} />
-                <Route path="/products/phones" component={Phone} />
+                <Route path="/products/:id(\d+)" component={ProductsId} />
+                <Route exact path="/products" component={Products} />
+                <Route path="/products/phones" component={PhoneList} />
                 <Route path="/products/tablets" component={Tablet} />
                 <Route path="/contact" children={()=><h2>Contact</h2>} />
                 <Route component={NotFound} />
