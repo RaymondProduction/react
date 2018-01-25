@@ -4,7 +4,7 @@ import React from 'react';
 import MessageForm from './components/MessageForm.jsx';
 
 // using ES6 modules
-import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Link, NavLink, Redirect } from 'react-router-dom'
 
 const active = {
     color: 'red',
@@ -35,7 +35,16 @@ class NotFound extends React.Component{
 
 class Main extends React.Component{
     render(){
-        return <h2>Main</h2>;
+        return (
+            <div>
+            <h2>Main</h2>
+                <p>Match: {JSON.stringify(this.props.match)}</p>
+                <p>Location {JSON.stringify(this.props.location)}</p>
+                <p>Id: {this.props.match.params.id}</p>
+                <p>Name: {new URLSearchParams(this.props.location.search).get("name")}</p>
+                <p>Age: {new URLSearchParams(this.props.location.search).get("age")}</p>
+            </div>
+            );
     }
 }
 class PhoneList extends React.Component{
@@ -88,13 +97,14 @@ ReactDOM.render(
         <div>
             <Nav />
             <Switch>
-                <Route exact path="/" component={Main} />
+                <Route exact path="/:id(\d+)" component={Main} />
                 <Route path="/about/:id?/:name?" component={About} />
                 <Route path="/products/:id(\d+)" component={ProductsId} />
                 <Route exact path="/products" component={Products} />
                 <Route path="/products/phones" component={PhoneList} />
                 <Route path="/products/tablets" component={Tablet} />
                 <Route path="/contact" children={()=><h2>Contact</h2>} />
+                <Redirect from="/" to="/0" />
                 <Route component={NotFound} />
             </Switch>
         </div>
