@@ -5,9 +5,10 @@
   "author": "Raymond and metanit.com",
   "scripts": {
     "dev": "webpack-dev-server --hot --open",
-    "build": "webpack"
+    "build": "webpack && lite-server"
   },
   "dependencies": {
+    "lite-server": "^2.3.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2"
