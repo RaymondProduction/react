@@ -6,32 +6,33 @@ var Message = require('./Message.jsx');
 class MessageList extends React.Component {
   constructor(props){
       super(props);
-      this.state = { messages: this.props.data.messages};
-
-      this.filterList = this.filterList.bind(this);
-  }
-  // filtering messages
-  filterList(text){
-      var filteredList = this.props.data.messages.filter(function(item){
-          return item.text.toLowerCase().search(text.toLowerCase())!== -1;
-      });
-      // update state
-      this.setState({messages: filteredList});
   }
   render(){
     var i = 0;
-    return(
-      <div>
-          <h2>{this.props.data.title}</h2>
-            <SearchPlugin filter={this.filterList}/>
-          {
-              this.state.messages.map(function(item){
-                  return <Message key= {i++} text={item.text} title={item.title} />
-              })
-          }
-      </div>);
+     console.log(this.props.messages);
+     this.props.messages.map(item=>{
+      console.log(item.get('text'));
+     })
+    return <div>
+        {this.props.messages.map(item =>
+          <Message key={item.get('text')}
+                    text={item.get('text')}
+                    title={item.get('title')}
+                    deleteMessage={this.props.deleteMessage}
+          />
+        )}
+      </div>
+  }
+    // return(
+    //   <div>
+    //       {
+    //           this.props.messages.map(function(item){
+    //               return <Message key= {i++} text={item.get('text')} title={item.get('title')} deleteMessage={this.props.deleteMessage}/>
+    //           })
+    //       }
+    //   </div>);
     // Each child in an array or iterator should have a unique "key" prop.
-  }
+ //}
 
 }
 
