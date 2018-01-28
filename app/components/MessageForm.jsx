@@ -58,14 +58,12 @@ class TitleField extends React.Component {
 class MessageForm extends React.Component {
   constructor(props) {
     super(props);
-//    this.handleSubmit = this.handleSubmit.bind(this);
   }
     onClick() {
     if (this.refs.messageField.value !== "") {
-      var text = this.refs.messageField.value;
-      var title = this.refs.titleField.value;
-     // this.refs.messageField.value ="";
-      return this.props.addMessage({title: title, message: message});
+      var text = this.refs.messageField.state.value;
+      var title = this.refs.titleField.state.value;
+      return this.props.addMessage({title: title, text: text});
     }
   }
 

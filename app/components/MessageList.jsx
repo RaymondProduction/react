@@ -8,14 +8,11 @@ class MessageList extends React.Component {
       super(props);
   }
   render(){
-    var i = 0;
-     console.log(this.props.messages);
-     this.props.messages.map(item=>{
-      console.log(item.get('text'));
-     })
+    var i=0;
     return <div>
         {this.props.messages.map(item =>
-          <Message key={item.get('text')}
+          <Message  id={item.get('id')}
+                    key={i++}
                     text={item.get('text')}
                     title={item.get('title')}
                     deleteMessage={this.props.deleteMessage}
@@ -23,17 +20,6 @@ class MessageList extends React.Component {
         )}
       </div>
   }
-    // return(
-    //   <div>
-    //       {
-    //           this.props.messages.map(function(item){
-    //               return <Message key= {i++} text={item.get('text')} title={item.get('title')} deleteMessage={this.props.deleteMessage}/>
-    //           })
-    //       }
-    //   </div>);
-    // Each child in an array or iterator should have a unique "key" prop.
- //}
-
 }
 
 module.exports = MessageList;

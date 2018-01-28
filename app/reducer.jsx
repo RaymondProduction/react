@@ -5,11 +5,16 @@ var reducer = function(state = Map(), action) {
     case "SET_STATE":
         return state.merge(action.state);
     case "ADD_MESSAGE":
-        return state.update("messages", (messages) => messages.push(action.message));
+        return state.update("messages", (messages) => messages.push(new Map({
+            title: action.message.title,
+            text: action.message.text,
+            id: messages.size+1
+          })));
+
     case "DELETE_MESSAGE":
         return state.update("messages",
             (messages) => messages.filterNot(
-                (item) => item.get('text') === action.message
+                (item) => item.get('id') === action.id
             )
         );
   }

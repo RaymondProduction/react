@@ -4,10 +4,10 @@ var addMessage = function (message) {
     message
   }
 };
-var deleteMessage = function (message) {
+var deleteMessage = function (id) {
   return {
     type: "DELETE_MESSAGE",
-    message
+    id
   }
 };
 

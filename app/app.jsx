@@ -16,7 +16,7 @@ var store = redux.createStore(reducer);
 store.dispatch({
   type: "SET_STATE",
   state: {
-    messages: [ {title: "1", text: "iPhone 7 Plus"}, {title: "2", text: "Samsung Galaxy A5"} ]
+    messages: [ {id:1, title: "1", text: "iPhone 7 Plus"}, {id: 2, title: "2", text: "Samsung Galaxy A5"} ]
   }
 });
 

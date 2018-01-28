@@ -6,12 +6,9 @@ import MessageList from './MessageList.jsx';
 
 
 class AppView extends React.Component {
-
- 
     render() {
-  console.log(this.props);
         return <div>
-            <MessageForm addPhone={this.props.addMassege}/>
+            <MessageForm addMessage={this.props.addMessage}/>
             <MessageList {...this.props} />
     </div>
   }
@@ -24,5 +21,3 @@ function mapStateToProps(state) {
 }
  
 module.exports = connect(mapStateToProps, actions)(AppView);
-
-//<MessageList messages = {{text: 'tet',title:'6'}} />
