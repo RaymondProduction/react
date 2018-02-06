@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Raymond and metanit.com",
   "scripts": {
+    "start": "lite-server",
     "dev": "webpack-dev-server --hot --open",
     "build": "webpack && lite-server"
   },
